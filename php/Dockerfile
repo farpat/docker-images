@@ -19,7 +19,7 @@ RUN docker-php-ext-install intl json zip pdo pdo_mysql && \
     docker-php-ext-enable imagick
 
 # Installation of composer
-RUN curl -sS https://getcomposer.org/install | php -- --install-dir=/usr/bin --filename=composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 ENV COMPOSER_CACHE_DIR=/.cache/composer
 
 # Installation of wkhtmltopdf
