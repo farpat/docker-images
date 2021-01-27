@@ -3,7 +3,7 @@ FROM php:7.4-fpm
 LABEL maintener farpat <p.farrugia@outlook.fr>
 
 # Installation of basic packages
-RUN apt-get update && apt-get install -y curl zip unzip git libzip-dev libicu-dev zsh
+RUN apt-get update && apt-get install -y wget curl zip unzip git libzip-dev libicu-dev zsh
 
 # Creation of user "app"
 RUN adduser --disabled-password --shell /usr/bin/zsh --home /home/app --gecos "User" app
@@ -26,8 +26,7 @@ ENV COMPOSER_CACHE_DIR=/.cache/composer
 
 # Installation of wkhtmltopdf
 RUN apt-get install -y xfonts-75dpi xfonts-base && \
-    curl -sL -o /tmp/w.deb https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.stretch_amd64.deb && \
-    dpkg -i /tmp/w.deb && \
-    rm /tmp/w.deb
-
+    curl "https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.buster_amd64.deb" -L -o "wkhtmltopdf.deb" && \
+    dpkg -i wkhtmltopdf.deb && \
+    rm wkhtmltopdf.deb
 USER app
