@@ -3,13 +3,15 @@ FROM php:7.4-fpm
 LABEL maintener farpat <p.farrugia@outlook.fr>
 
 # Installation of basic packages
-RUN apt-get update && apt-get install -y curl zip unzip git libzip-dev libicu-dev
+RUN apt-get update && apt-get install -y curl zip unzip git libzip-dev libicu-dev zsh
 
-# Installation of ZSH
-RUN apt-get install -y zsh && \
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" && \
-    git clone https://github.com/zsh-users/zsh-autosuggestions /root/.zsh/zsh-autosuggestions
-COPY .zshrc /root/.zshrc
+# Creation of user "app"
+RUN adduser --disabled-password --shell /usr/bin/zsh --home /home/app --gecos "User" app
+USER app
+RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" && \ 
+    git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
+COPY .zshrc /home/app/.zshrc
+USER root
 
 # Installation of PHP extensions and Imagick
 RUN docker-php-ext-install intl json zip pdo pdo_mysql && \
@@ -28,4 +30,4 @@ RUN apt-get install -y xfonts-75dpi xfonts-base && \
     dpkg -i /tmp/w.deb && \
     rm /tmp/w.deb
 
-WORKDIR /root
+USER app
