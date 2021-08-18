@@ -1,13 +1,8 @@
-export ZSH="/home/app/.oh-my-zsh"
-
-ZSH_THEME="af-magic"
+ZSH_THEME="tjkirch"
 
 plugins=()
 
-source $ZSH/oh-my-zsh.sh
-
-if [ -f ~/.bash_aliases ]; then
-	. ~/.bash_aliases
-fi
-
+source ~/.oh-my-zsh/oh-my-zsh.sh
+source ~/.bash_aliases
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
