@@ -1,4 +1,4 @@
-FROM php:7.4-fpm
+FROM php:8.0-fpm
 
 LABEL maintener farpat <p.farrugia@outlook.fr>
 
@@ -6,7 +6,7 @@ LABEL maintener farpat <p.farrugia@outlook.fr>
 RUN apt-get update && apt-get install -y wget curl zip unzip git libzip-dev libicu-dev zsh
 
 # Installation of PHP extensions and Imagick
-RUN docker-php-ext-install intl json zip pdo pdo_mysql && \
+RUN docker-php-ext-install intl zip pdo && \
     mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini" && \
     apt-get install -y libmagickwand-dev --no-install-recommends && \
     pecl install imagick && \
