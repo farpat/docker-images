@@ -6,7 +6,7 @@ LABEL maintener farpat <p.farrugia@outlook.fr>
 RUN apt-get update && apt-get install -y wget curl zip unzip git libzip-dev libicu-dev zsh
 
 # Installation of PHP extensions and Imagick
-RUN docker-php-ext-install intl zip pdo && \
+RUN docker-php-ext-install intl zip pdo pdo_mysql && \
     mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini" && \
     apt-get install -y libmagickwand-dev --no-install-recommends && \
     pecl install imagick && \
