@@ -28,5 +28,3 @@ RUN apt-get install -y xfonts-75dpi xfonts-base && \
     curl "https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.buster_amd64.deb" -L -o "wkhtmltopdf.deb" && \
     dpkg -i wkhtmltopdf.deb && \
     rm wkhtmltopdf.deb
-
-WORKDIR /home/app
